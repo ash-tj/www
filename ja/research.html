@@ -1,60 +1,123 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Satoshi Tajima</title>
-    <style>
-      html, body {
-        height: 100%;
-      }
-      body {
-        background-color: #fff;
-        background: radial-gradient(circle at center, #fff 0%, #f8f8f8 75%, #ebebeb 100%);
-        color: #222;
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-        font-size: 1rem;
-        line-height: 1.5;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      main {
-        padding: 1rem;
-        text-align: center;
-      }
-      h1 {
-        font-size: 2.5rem;
-        line-height: 1.1;
-        margin: 0;
-      }
-      @media screen and (max-width: 480px) {
-        h1 {
-          font-size: 1.5rem;
-        }
-      }
-      h1::after {
-        content: "";
-        background-color: #ffe800;
-        background: repeating-linear-gradient(45deg, #ffe800, #ffe800 0.5rem, #222 0.5rem, #222 1.0rem);
-        display: block;
-        height: 0.5rem;
-        margin-top: 1rem;
-      }
-      img {
-        max-width: 100%;
-        height: auto;
-      }
-      p {
-        margin: 1rem 0 0 0;
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <h1>ただいま準備中です...</h1>
-      <p><a href="index.html">ホームへ戻る</a></p>
-    </main>
-  </body>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>田嶋 智 | Satoshi Tajima</title>
+    <link href="../templatemo-personal-style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/iqa5tmm.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/css/flag-icon.min.css" />
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DL3HE2YBZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DL3HE2YBZS');
+</script>
+
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">田嶋 智 <span class="ja-label">| Satoshi Tajima, PhD</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="mailto:satoshi.tajima@unine.ch">Contact</a></li>
+                <li><a href="../research.html">EN</a></li>
+                <li><a href="research.html">JA</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="publications.html">Publications</a></li>
+            <li><a href="mailto:satoshi.tajima@unine.ch">Contact</a></li>
+            <li><a href="../research.html">EN</a></li>
+            <li><a href="research.html">JA</a></li>
+        </ul>
+    </div>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">主な研究テーマ <span class="ja-label">| Research</span></h2>
+            
+            <div class="page-content">
+                <div class="about-text">
+                    <h1>多孔質媒体中の非線形・カオス的溶質輸送 <span class="ja-label">| Nonlinear and chaotic transport in porous media</span></h1>
+
+                    <p>土壌や岩石のように多くの間隙をもつ「多孔質媒体」では、水の流れが空間的に不均質であり、かつ時間とともに変化します。これらは、水に溶けた物質（溶質）がどこまで広がり、どれほど長くとどまり、周囲の水とどう混ざるかを左右します。一連の研究では、理論モデルと数値シミュレーションを用いて、こうした多孔質媒体中の溶質輸送の仕組みを調べています。</p>
+
+                    <p>
+                    不均質な地盤では、流れに乗って移動する時間のばらつきが溶質の広がりを生み、その広がり方の変化を二つの代表的な時間尺度で記述できることを示しました。これをもとに、広がる速さを表す「分散係数」が時間とともに変わるモデルを構築しました。従来の一定の係数を使うモデルが、移動初期の広がりや上流側への広がりを過大評価する問題を軽減し、強い不均質性をもつ地盤でも比較的簡単な計算で予測する方法を示した点に意義があります。</p>
+
+                    周期的な圧力変動、不均質性、地盤が圧力に応じて水を蓄えたり放出したりする性質が組み合わさると、溶質の移動が抑えられる一方、混合が促進されることを示しました。その理由は、物質をとどめる流れと、物質の分布を引き伸ばして折り畳む「カオス的な流れ」が共存するためです。物質が遠くへ移動することと、その場で混ざることを区別し、滞留と混合が同時に強まる仕組みを明らかにしました。
+
+                    淡水と海水の密度差を考慮した三次元シミュレーションにより、潮汐と地盤の不均質性が、両者の境界付近に物質をとどめる流れを生むことを示しました。不均質性が強いほど滞留が強まり、淡水側と海水側から来た物質が複雑に入り交じりました。沿岸地下水において、汚染物質の長期滞留と、化学・生物反応を促しうる混合の双方を生む機構を示した点に意義があります。
+
+                    これらの成果は、地下水汚染の広がる範囲や残留の評価、浄化剤を汚染物質と効果的に混ぜるための注入・揚水方法の検討に役立つ基礎となります。また、沿岸の地下水・海域の水質保全や、地下貯留における周囲の流体との混合の予測にもつながります。
+                    </p>
+
+                </div>
+
+                <div class="about-text">
+                    <h1>高潮に対する地表水–地下水連成系の応答 <span class="ja-label">| Storm-surge impacts on the surface–subsurface continuum</span></h1>
+
+                    <p>低平な環礁では、高潮による海面上昇が地下に伝わり、地下水が地表に湧き出すことで浸水が発生しますが、その規模を地下の地質構造がどのように左右するかは明らかではありませんでした。地表水と地下水を結合した数値解析により、完新世堆積物の下にある更新世石灰岩の透水性が高く、両者の境界が浅いほど、平常時の地下水位や塩分分布がほぼ同じでも、高潮時の浸水が深く長期化することを示しました。この結果は、平常時の状態だけでは見えない洪水リスクを明らかにし、環礁の防災や農地・淡水湿地の塩害評価に地下構造を組み込む必要性を示しています。（Tajima et al., 2023, Water Resources Research）</p>
+
+                    <p>高潮によって海水が陸上に流入すると地下水の塩水化が長く続くため、繰り返す高潮の強度と頻度が回復をどう変えるかを理解する必要があります。島嶼を模した地表水・地下水結合モデルにより、帯水層が元の状態へ回復する場合と、塩分が蓄積して淡水量の少ない新たな動的平衡へ移行する場合を明らかにし、その違いを高潮の強度と頻度による塩分負荷を統合した無次元指標で整理しました。この成果は、高潮後の回復を個々の災害の影響と長期的な水資源変化をつなぐ過程として捉え、気候変動に伴う島嶼地下水の脆弱性を予備評価する枠組みを提供します。（Tajima et al., 2026, Water Resources Research）</p>
+
+                    <p>サイクロン時には豪雨と高潮が同時に発生しますが、複合洪水の評価では地下水からの湧出と雨水による浸水の相互作用が十分に考慮されてきませんでした。地表水・地下水の結合解析により、雨水による浸水が降雨に速やかに応答する一方、地下水による浸水は地下での水圧伝播に伴って遅れて発生し、その後の浸透能力と地下の貯留によって浸水の長期化を左右することを示しました。この成果は、複合洪水の発生時刻や継続時間を理解するうえで地下水が不可欠であることを示し、沿岸域の洪水予測と防災計画の改善につながります。（Tajima et al., 2026, プレプリント）</p>
+                </div>
+
+                <div class="about-text">
+                    <h1>小島嶼の地下水資源と気候変動への適応 <span class="ja-label">| Groundwater resources and climate adaptation on small islands</span></h1>
+
+                    <p>地表水に乏しい島嶼では、塩水の上に形成される「淡水レンズ」が重要な水資源ですが、透水性の高い石灰岩からなる島で従来の解析式がその量を適切に推定できるかは不明でした。多良間島を念頭に置いた数値解析と解析式の比較により、透水性が極めて高い場合には沿岸部の浅い地下まで塩水が存在し、従来の解析式による淡水量の過大評価が大きくなることを示しました。この成果は、島嶼の淡水資源を評価する際に密度差と分散による混合を考慮する必要性を示し、地下水量を過大に見積もらないためのモデル選択の根拠を提供します。（Tajima et al., 2022, Hydrological Research Letters）</p>
+
+                    <p>多良間島やナウルなどの透水性が高い島では、淡水が存在すると一般に想定される地下水面付近でも塩分が観測され、その形成機構が課題となっていました。数値解析により、深部の塩分が上向きの移流と海向きの流れに伴う横分散によって浅部へ運ばれ、特に地下水面付近では横分散が重要な役割を果たすことを明らかにしました。この成果は、島嶼で見られる特徴的な塩分分布を物理的に説明し、地下水位だけでなく塩分輸送の仕組みを踏まえた淡水資源評価を支えます。（Tajima et al., 2024, Groundwater）</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2026 Satoshi Tajima. All rights reserved.</p>
+                </div>
+                
+                <div class="footer-right">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="https://www.unine.ch/">UniNE</a>
+                    <a href="https://scholar.google.com/citations?user=weT8YZ4AAAAJ">Google Scholar</a>
+                    <a href="https://www.researchgate.net/profile/Satoshi_Tajima3">ResearchGate</a>
+                    <a href="https://researchmap.jp/s-tajima">researchmap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<script src="../templatemo-personal-javascripts.js"></script>
+
+</body>
 </html>
