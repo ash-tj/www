@@ -16,7 +16,8 @@ https://templatemo.com/tm-593-personal-shape
             width: 100%;
             overflow-x: hidden;
             position: relative;
-            font-family: "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Inter", "Noto Sans JP", Arial, sans-serif;
+            font-family: "Open Sans", "Noto Sans JP", sans-serif;
+            /* "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Inter", "Noto Sans JP", Arial, sans-serif; */
         }
 
         * {
@@ -165,7 +166,7 @@ https://templatemo.com/tm-593-personal-shape
         .ja-label {
             font-weight: 400;
             color: #353535;
-            font-size: 0.7em;
+            font-size: 0.8em;
         }
         
         /* Navigation */
@@ -658,7 +659,6 @@ https://templatemo.com/tm-593-personal-shape
         .about-text p {
             font-size: 1.1rem;
             color: var(--text-secondary);
-            margin-top: 1.1rem;
             margin-bottom: 1.1rem;
             line-height: 1.5;
         }
