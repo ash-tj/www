@@ -16,8 +16,7 @@ https://templatemo.com/tm-593-personal-shape
             width: 100%;
             overflow-x: hidden;
             position: relative;
-            font-family: "Inter", "Noto Sans JP", Arial, sans-serif;
-            /* "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Inter", "Noto Sans JP", Arial, sans-serif; */
+            font-family: "Inter", "Noto Sans JP", sans-serif;
         }
 
         * {
@@ -139,9 +138,10 @@ https://templatemo.com/tm-593-personal-shape
             --accent-color: #f59e0b;
             --text-primary: #1a1a1a;
             --text-secondary: #373737;
+            --text-caption: #656565;
             --text-light: #ffffff;
             --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
+            --bg-nav: #0515532c;
             --bg-dark: #0f172a;
             --bg-card: rgba(255, 255, 255, 0.95);
             --gradient: linear-gradient(135deg, #092388 0%, #986807 100%);
@@ -167,7 +167,7 @@ https://templatemo.com/tm-593-personal-shape
         .ja-label {
             font-weight: 400;
             color: var(--text-primary);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             line-height: 1.5;
         }
         
@@ -176,12 +176,23 @@ https://templatemo.com/tm-593-personal-shape
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--bg-primary);
             backdrop-filter: blur(20px);
             z-index: 1000;
             padding: 1rem 0;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 1400px;
+            height: 1px;
+            background: rgba(0, 0, 0, 0.2);
         }
 
         nav.scrolled {
@@ -332,7 +343,7 @@ https://templatemo.com/tm-593-personal-shape
             color: var(--text-light);
             text-decoration: none;
             transition: all 0.3s ease;
-            background: var(--gradient);
+            background: var(--text-primary);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -386,7 +397,6 @@ https://templatemo.com/tm-593-personal-shape
             bottom: 0;
             background: radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
                         radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            /* animation: pulse 4s ease-in-out infinite alternate; */
         }
 
         .hero-content {
@@ -624,7 +634,7 @@ https://templatemo.com/tm-593-personal-shape
 
         /* About Section */
         .about {
-            background: var(--bg-secondary);
+            background: var(--bg-primary);
             position: relative;
         }
 
@@ -635,7 +645,6 @@ https://templatemo.com/tm-593-personal-shape
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
         }
 
         .about-content {
@@ -669,25 +678,6 @@ https://templatemo.com/tm-593-personal-shape
                 margin: 0 auto 2rem;
             }
         }
-        /* 
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 3fr;
-            gap: 6rem;
-            align-items: center;
-            position: relative;
-        }
-
-        .about-image {
-            width: 100%;
-            height: 350px;
-            background: url('images/portrait.png') center/cover;
-            border-radius: 30px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-2xl);
-            transition: transform 0.4s ease;
-        } */
 
         .about-text {
             min-width: 0;
@@ -696,7 +686,7 @@ https://templatemo.com/tm-593-personal-shape
 
         .about-text h1 {
             font-size: 2rem;
-            margin-top: 2.2rem;
+            margin-top: 1.5rem;
             margin-bottom: 1rem;
             color: var(--text-primary);
             font-weight: 600;
@@ -729,11 +719,11 @@ https://templatemo.com/tm-593-personal-shape
         }
 
         .about-text h6 {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            font-weight: 500;
-            margin-bottom: 2rem;
-            line-height: 1.5;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
         }
 
         .about-text li {
@@ -744,7 +734,7 @@ https://templatemo.com/tm-593-personal-shape
         }
 
         .reflist {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
             margin-top: 1rem;
             margin-bottom: 1rem;
@@ -761,6 +751,49 @@ https://templatemo.com/tm-593-personal-shape
             margin-bottom: 2.5em;
         }
 
+        .about-text .research-figure-grid {
+            display: grid;
+            grid-template-columns: var(--figure-columns, 1fr 1fr);
+            gap: 2rem;
+            align-items: start;
+            margin: 2rem 0 2.5rem;
+        }
+
+        .about-text .research-figure {
+            margin: 0;
+        }
+
+        .about-text .research-figure img {
+            display: block;
+            width: 100%;
+            height: var(--figure-height, auto);
+            object-fit: contain;
+            object-position: center bottom;
+        }
+
+        .about-text .research-figure figcaption {
+            margin-top: 1rem;
+            width: 100%;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: var(--text-caption);
+            margin-bottom: 1rm;
+        }
+
+        .about-text .research-description {
+            min-width: 0;
+        }
+
+        @media (max-width: 768px) {
+            .about-text .research-figure-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-text .research-figure-grid .research-figure img {
+                height: auto;
+            }
+        }
+        
         .cv-columns {
             display: grid;
             grid-template-columns: 1.2fr 1fr;
@@ -913,7 +946,7 @@ https://templatemo.com/tm-593-personal-shape
 
         .tech-tag {
             padding: 0.4rem 1rem;
-            background: var(--bg-secondary);
+            background: var(--bg-primary);
             color: var(--text-secondary);
             border-radius: 20px;
             font-size: 0.85rem;

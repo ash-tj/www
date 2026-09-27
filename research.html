@@ -6,8 +6,10 @@
     <title>Satoshi Tajima</title>
     <link href="templatemo-personal-style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.typekit.net/iqa5tmm.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/css/flag-icon.min.css" />
 </head>
@@ -57,72 +59,121 @@
             
             <div class="page-content">
                 <div class="about-text">
-                    <h1>Coastal aquifers as interfaces: Flow, transport, and interactions across land, ocean, and society</h1>
-
-                    <p>Coastal aquifers connect land and ocean through groundwater flow and solute transport. Freshwater and seawater interact through density-dependent flow, fluctuations in sea level propagate inland, and groundwater exchanges with surface water. I investigate the physical processes governing these connections using synthetic numerical experiments, supported by analytical theory, stochastic methods, and nonlinear dynamics.
-
-                    My central interest is how geological heterogeneity, aquifer storage, and environmental forcing interact to produce complex behaviour. Numerical experiments allow me to isolate these mechanisms, while theoretical analysis helps translate their effects into more general descriptions. Physical understanding and model development therefore advance together throughout my research.
-
-                    This work provides a foundation for evaluating freshwater resources, contaminant transport, and coastal hazards. By identifying both the controlling mechanisms and the limits of simplified descriptions, I aim to support predictions that are physically grounded and appropriate to the information available.</p>
-                </div>
-
-                <div class="about-text">
-                    <h1>Starting point: Freshwater distribution in coastal aquifers</h1>
-
-                    <p>My research began with freshwater lenses: bodies of fresh groundwater maintained by rainfall recharge above denser saline groundwater in islands. Comparing sharp-interface analytical models with density-dependent flow and transport simulations, we found that freshwater volume can be overestimated under highly permeable conditions. We subsequently examined how salt reaches the water table, the upper boundary of the saturated zone. Upward advection, which carries salt with flowing water, dominates at depth. Near the water table, transverse dispersion associated with seaward flow becomes more important, transporting salt across the predominant flow direction. These mechanisms can maintain non-fresh groundwater at the water table even under quasi-steady conditions without tides or storms. Tajima et al. (2022), Hydrological Research Letters; Tajima et al. (2024), Groundwater.
-
-                    The scientific contribution is to connect freshwater-lens geometry with the salt fluxes that maintain it. Freshwater distribution reflects a dynamic balance of transport processes, even when the overall salinity pattern changes little with time. Resolving those processes explains distributions that a sharp freshwater–saltwater boundary cannot explicitly represent and clarifies when that approximation becomes inadequate.
-
-                    For resource assessment, this distinction affects the estimated volume of freshwater underground. The findings identify highly permeable aquifers as settings where dispersive salt transport may need explicit representation to avoid overly optimistic estimates of freshwater storage.</p>
-                </div>
-
-                <div class="about-text">
-                    <h1>Transport and mixing in heterogeneous porous media</h1>
-                    <h3><i>How do heterogeneity and flow variability shape transport and mixing?</i></h3>
-
-                    <p>The importance of salt transport motivates a broader investigation of how substances move through spatially variable geological materials. Differences in hydraulic conductivity create fast pathways and slow regions, producing a distribution of particle travel times. Using a continuous-time random walk framework—a stochastic description of motion with variable travel times—we developed time-dependent apparent dispersion coefficients for displacement fronts. These coefficients capture the evolution of large-scale spreading before a constant, long-time dispersion regime is reached. Tajima et al. (2024), Advances in Water Resources.
-
-                    When flow also fluctuates, transport depends on the evolving structure of particle trajectories. In periodically forced heterogeneous aquifers with finite storage, stable flow structures restrict front advancement, while chaotic advection, characterized by sensitive dependence on initial particle position, promotes stretching and rearrangement. Together with local dispersion, this enhances mixing. Related simulations of three-dimensional confined coastal aquifers showed that tides, heterogeneity, and density differences generate periodic and chaotic trajectories within the salinity transition zone, increasing particle trapping and intermingling between land- and sea-derived particles. Tajima & Dentz (2025), Advances in Water Resources; Tajima & Dentz (2025), Water Resources Research.
-
-                    These studies connect particle-scale dynamics with distinct measures of transport. Spreading describes the spatial extent of a distribution, stirring describes its deformation, and mixing describes the reduction of concentration contrasts through local exchange. Restricted migration and enhanced mixing can occur simultaneously, so one measure cannot reliably substitute for another. This provides a mechanistic explanation for the coexistence of retention and mixing in transient groundwater systems.
-
-                    The distinction matters when predicting contaminant fate or considering groundwater remediation. Long residence times can sustain contamination, while increased contact between substances can create opportunities for reactions. The results help identify which transport properties an assessment must resolve and provide a basis for exploring how periodic forcing might influence both contaminant confinement and mixing.</p>
-                </div>
-
-                <div class="about-text">
-                    <h1>Storm-surge impacts across surface and subsurface</h1>
-                    <h3><i>How do storm surges reshape coastal surface–subsurface dynamics?</i></h3>
-
-                    <p>In parallel, I have investigated storm-surge responses using coupled surface–subsurface models. Elevated coastal hydraulic heads can propagate inland, raise the water table, and cause groundwater exfiltration, the discharge of groundwater onto the land surface. Our atoll simulations showed that the underlying permeable limestone and the depth of its upper boundary strongly control inundation. Under the tested conditions, surge-driven groundwater dynamics had a greater influence on inundation depth than changes in rainfall intensity. Subsequent compound-flooding simulations showed that, although rainfall supplied more cumulative water across the scenarios examined, groundwater exfiltration could exceed the instantaneous rainfall contribution and sustain inundation after rainfall subsided. Tajima et al. (2023), Water Resources Research; Tajima et al. (2026), compound-flooding preprint.
-
-The subsurface response also continues after surface water drains. We examined how stronger surges and longer intervals between events affect the balance between salt input and flushing. The simulations revealed two long-term regimes: full recovery and a shifted dynamic equilibrium, in which recurrent inputs and removal balance at a persistently elevated salt content. Tajima et al. (2026), Water Resources Research.
-
-Together, these findings distinguish the processes governing flood magnitude, flood timing, and groundwater-quality recovery. The largest water input need not control flood persistence, and the end of inundation need not mark the recovery of groundwater. The studies connect these different responses to subsurface structure, storage, surface–groundwater exchange, and the balance between repeated disturbances and recovery.
-
-For coastal hazard assessment, groundwater deserves explicit consideration both where it dominates inundation and where its delayed response prolongs flooding. For water-resource assessment, the recurrence of saltwater inundation must be considered alongside individual event severity. These distinctions help identify impacts that predictions focused only on rainfall, surface flooding, or isolated storms may overlook.
+                    <h1>Transport and mixing in porous media</h1>
+                    
+                    <p>
+                        Heterogeneity and transient forcing, such as tides, can generate complex transport processes in porous media, including time-dependent spreading and chaotic mixing. We combine numerical flow and transport simulations with particle tracking and stochastic transport theory to uncover the mechanisms underlying these behaviours and develop quantitative descriptions of their temporal evolution. This work seeks to shed new light on fundamental transport dynamics driven by land–ocean interactions, achieve more accurate representations of subsurface transport processes, and provide insights relevant to subsurface contamination and seaward nutrient export.
                     </p>
+
+                    <div class="research-figure-grid" style="--figure-columns: 0.9fr 1.1fr; --figure-height: 280px;">
+                        <figure class="research-figure">
+                            <img src="images/2025awr.jpg"
+                                alt="Chaotic advection in a heterogeneous aquifer under transient forcing">
+                            <figcaption>
+
+                                <strong>Chaotic advection in a heterogeneous aquifer under transient forcing.</strong> (a) The Poincaré section reveals a complex Lagrangian structure containing stochastic regions. (b) The corresponding finite-time Lyapunov exponents for points A–C in (a) remain positive, providing quantitative evidence of chaotic advection.
+                                <i><a href="https://doi.org/10.1016/j.advwatres.2025.105021">Tajima &amp; Dentz (2025) AWR</a></i>.
+                            </figcaption>
+                        </figure>
+
+                        <figure class="research-figure">
+                            <img src="images/2025wrr.jpg" alt="Pathlines illustrating chaotic mixing in a three-dimensional heterogeneous coastal aquifer under transient forcing">
+                            <figcaption>
+                                <strong>Pathlines illustrating chaotic mixing in a three-dimensional heterogeneous coastal aquifer under transient forcing.</strong> Red and blue pathlines represent contaminant particles originating from the land and sea boundaries, respectively. The pathlines are projected orthogonally onto the <i>x</i>-<i>z</i> plane, with the <i>x</i>-axis aligned with the mean flow. White contours denote normalized salinity. 
+                                The trajectories form confined periodic and chaotic orbits within the freshwater–saltwater transition zone, perpetually trapping land- and sea-derived particles and enhancing intermixing between them. <i><a href="https://doi.org/10.1029/2025WR0406201">Tajima &amp; Dentz (2025) WRR</a></i>.
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="reflist">
+                        <h6>Related publications</h6>
+                        <strong>Tajima, S.</strong> & Dentz, M. (2025). Tides and Heterogeneity Drive Trapping and Chaotic Mixing in Coastal Aquifers. <i>Water Resources Research</i>, 61(11), e2025WR040620.
+                        <a href="https://doi.org/10.1029/2025WR040620">Link</a><br>
+                        <strong>Tajima, S.</strong> & Dentz, M. (2025). Transient forcing in heterogeneous aquifers drives solute containment and chaotic mixing. <i>Advances in Water Resources</i>, 203, 105021.
+                        <a href="https://doi.org/10.1016/j.advwatres.2025.105021">Link</a><br>
+                        <strong>Tajima, S.</strong>, Dentz, M., Liu, J., & Tokunaga, T. (2024). Time-dependent dispersion coefficients for the evolution of displacement fronts in heterogeneous porous media. <i>Advances in Water Resources</i>, 189, 104714.
+                        <a href="https://doi.org/10.1016/j.advwatres.2024.104714">Link</a>
+                    </div>
                 </div>
 
                 <div class="about-text">
-                    <h1>Turning physical understanding into predictive models</h1>
-                    <h3><i>How can physical understanding be translated into predictive models?</i></h3>
+                    <h1>Storm-surge impacts on coastal surface–subsurface systems</h1>
+                    
+                    <p>Storm surges affect coastal surface–subsurface systems through wave overwash and subsequent vertical seawater intrusion, as well as groundwater flooding driven by the subsurface propagation of a hydraulic head rise. 
+                    Using integrated surface–subsurface numerical simulations, we investigate the temporal dynamics of these processes and the influence of hydrogeological settings on these dynamics. This work aims to advance mechanistic understanding of hydrological processes driven by storm surges and improve coastal hazard assessments, thereby contributing to the resilience of coastal regions.</p>
 
-                    <p>A recurring objective is to express the mechanisms identified through numerical experiments in more compact predictive forms. The time-dependent dispersion model connects travel-time variability to front spreading. For recurrent storm surges, a dimensionless number, E, combines changes in surge intensity and frequency, helping characterize recovery regimes and the excess salt retained at dynamic equilibrium. More recently, our boundary-integral framework has extended freshwater-lens estimation beyond standard analytical island geometries. Under its assumptions, fully untruncated lenses—those whose thickness is not restricted by the aquifer base—show an approximate relationship in which volume scales with the square root of island circularity at equal area and hydrogeological conditions. Tajima et al. (2024), Advances in Water Resources; Tajima et al. (2026), Water Resources Research; Tajima et al. (2026), boundary-integral preprint.
+                    <div class="research-figure-grid" style="--figure-columns: 0.95fr 1.05fr; --figure-height: 230px;">
+                        <figure class="research-figure">
+                            <img src="images/2026wrr.jpg"
+                                alt="Schematic of storm–surge impacts on the coastal surface–subsurface continuum">
+                            <figcaption>
+                                <strong>Schematic of storm–surge impacts on the coastal surface–subsurface continuum.</strong> Rising sea levels during a storm surge often lead to wave overwash, resulting in seawater inundation of the land surface and vertical seawater intrusion (SWI) into the subsurface. The elevated sea level also increases the hydraulic head in the sea, driving landward lateral SWI. In addition, the groundwater table rises in response to the higher sea head, sometimes causing groundwater flooding. <i><a href="https://doi.org/10.1029/2025WR042142">Tajima et al. (2026) WRR</a></i>.
+                            </figcaption>
+                        </figure>
 
-The common scientific contribution is to identify relationships between system properties, external forcing, and observable behaviour. These reduced descriptions make the controlling physics explicit. Their value depends on retaining the relevant processes: the boundary-integral framework, for example, retains sharp-interface and predominantly horizontal-flow assumptions, making it complementary to the detailed salt-transport models that establish where such approximations become inadequate.
+                        <figure class="research-figure">
+                            <img src="images/2023wrr.jpg"
+                                alt="Temporal evolution of surge-driven groundwater flooding under different hydrogeological settings">
+                            <figcaption>
 
-Practically, these models support preliminary assessment and comparison when detailed characterization is unavailable. They can help estimate freshwater storage, examine sensitivity to changing storm patterns, and identify conditions requiring more detailed investigation. Explicit assumptions also make it clearer what can reasonably be inferred from limited data.</p>
+                                <strong>Temporal evolution of surge-driven groundwater flooding under different hydrogeological settings.</strong>
+                                Atolls are characterized by a dual-aquifer configuration, where a Holocene sediment aquifer overlies a more permeable Pleistocene limestone aquifer, with the unconformity known as the Thurber discontinuity.
+                                Swamp water depth varies with (a) the elevation of the Thurber discontinuity and (b) the hydraulic conductivity of the Pleistocene aquifer, demonstrating how the dual-aquifer configuration controls the magnitude and persistence of surge-driven groundwater flooding (surge duration shown in red).
+                                <i><a href="https://doi.org/10.1029/2023WR034762">Tajima et al. (2023) WRR</a></i>.
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="reflist">
+                        <h6>Related publications</h6>
+                        <strong>Tajima, S.</strong>, Brunner, P., Liu, J., Delottier, H., & Tokunaga, T. (2023). Groundwater flooding on atolls caused by storm surges: Effects of the dual-aquifer configuration. <i>Water Resources Research</i>, 59(10), e2023WR034762.
+                        <a href="https://doi.org/10.1029/2023WR034762">Link</a><br>
+                        <strong>Tajima, S.</strong>, Therrien, R., & Brunner, P. (2026). Climate change alters post-surge recovery of coastal aquifers. <i>Water Resources Research</i>, 62(3), e2025WR042142.
+                        <a href="https://doi.org/10.1029/2025WR042142">Link</a><br>
+                        <strong>Tajima, S.</strong>, Therrien, R., Purtschert, R., & Brunner, P. (2026). Groundwater contribution to cyclone-driven compound flooding. <i>Preprint at ESS Open Archive</i>.
+                        <a href="https://doi.org/10.22541/essoar.15002297/v2">Link</a>
+                    </div>
                 </div>
 
                 <div class="about-text">
-                    <h1>Ways forward: Groundwater at the interface of nature and society</h1>
-                    <h3><i>How do groundwater systems and human activities influence one another?</i></h3>
+                    <h1>Island groundwater resources under climate change</h1>
+                    
+                    <p>Groundwater is a vital source of freshwater on small islands, yet its availability is highly sensitive to climate change through sea-level rise and shifts in the intensity and frequency of extreme events such as storm surges. 
+                    We use integrated surface–subsurface simulations to assess climate change impacts on freshwater availability under different climate scenarios, while developing new tools to quantify these impacts with limited data and computational resources.
+                    We also seek to bring this process-based hydrogeological understanding into dialogue with diverse knowledge systems through collaboration with a broad range of stakeholders. 
+                    This work provides a foundation for transdisciplinary research that can inform sustainable groundwater management and climate adaptation.</p>
+                    
+                    <div class="research-figure-grid" style="--figure-columns: 1fr 1fr; --figure-height: 400px;">
+                        <figure class="research-figure">
+                            <img src="images/review.jpg"
+                                alt="Schematic of hydrogeological setting of a Pacific Island, and projected climate–change impacts and trends">
+                            <figcaption>
 
-                    <p>Groundwater dynamics influence water availability and flood exposure, while abstraction, land use, and adaptation measures modify recharge, flow, and storage. Our review of groundwater in the Pacific Islands examines this wider setting by synthesizing hydrogeological conditions, climate pressures, and adaptation options alongside the social and cultural contexts of water management. It considers how scientific and local knowledge can inform decisions under persistent uncertainty. Tajima et al., review preprint.
+                                <strong>Schematic of hydrogeological setting of a Pacific Island, and projected climate–change impacts and trends.</strong> Rainfall infiltrates through the unsaturated zone to replenish fresh groundwater, which overlies denser saline groundwater, with a transition zone in which salinity gradually increases. Fresh groundwater resources can decline through two main mechanisms: decreased recharge and lateral or vertical seawater intrusion (SWI). Climate change can drive these mechanisms through changes in both climate averages and the frequencies and intensities of climate extremes and variability.
+                                <i><a href="https://doi.org/10.22541/essoar.176442684.45381296/v2">Tajima et al. (2026) Preprint</a></i>.
+                            </figcaption>
+                        </figure>
 
-The review broadens the assessment of groundwater vulnerability by connecting physical exposure with the contexts that shape adaptation. Understanding environmental change and understanding responses to that change are interdependent tasks. This perspective also motivates a longer-term research direction: investigating how human choices feed back into groundwater systems and determining which feedbacks need to be represented in predictive models.
+                        <figure class="research-figure">
+                            <img src="images/bis.jpg"
+                                alt="Effects of sea level rise (SLR) on freshwater lens volume">
+                            <figcaption>
 
-For adaptation, the implication is that improved physical predictions must be connected to local priorities, knowledge, and decision-making processes. Robust and collaborative approaches allow action to proceed despite uncertainties that cannot be fully eliminated. My aim is to contribute physically grounded understanding and models to this process, while allowing practical questions to generate new directions for fundamental research.</p>
+                                <strong>Effects of sea level rise (SLR) on freshwater lens volume.</strong> 
+                                (a) Schematic of freshwater lens contraction and volume reduction induced by SLR. The shoreline retreats inland by <i>ΔR</i> in response to cumulative SLR (<i>ΔH</i>), with the extent of retreat controlled by the coastal slope (tan<i>φ</i>). (b) Relationship between cumulative SLR (<i>ΔH</i>) and the ratio of post- to pre-SLR freshwater lens volume (<i>V'/V</i>) for different coastal slopes (tan<i>φ</i>).
+                                <i><a href="https://doi.org/10.22541/essoar.15005361/v1">Tajima et al. (2026) Preprint</a></i>.
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="reflist">
+                        <h6>Related work</h6>
+                        <strong>Tajima, S.</strong>, Liu, J., & Tokunaga, T. (2022). Estimating freshwater lens volume in highly permeable aquifers. <i>Hydrological Research Letters</i>, 16(1), 12-17. <a href="https://doi.org/10.3178/hrl.16.12">Link</a><br>
+                        <strong>Tajima, S.</strong>, Therrien, R., & Brunner, P. (2026). Climate change alters post-surge recovery of coastal aquifers. <i>Water Resources Research</i>, 62(3), e2025WR042142.
+                        <a href="https://doi.org/10.1029/2025WR042142">Link</a><br>
+                        <strong>Tajima, S.</strong>, Therrien, R., Purtschert, R., & Brunner, P. (2026). Boundary-integral solutions for freshwater lens volume in arbitrarily shaped islands. <i>Preprint at ESS Open Archive</i>. <a href="https://doi.org/10.22541/essoar.15005361/v1">Link</a><br>
+                        <strong>Tajima, S.</strong>, Purtschert, R., Savard, M.–C., Rosier, M., Kotra, K. K., Therrien, R., Coulombe, C., Müller, C., Masse–Dufresne, J., Richard, F., Bertone, L., Barbecot, F., Lucas–Picher, P., Tigona, R., Corcho Albarado, J. A., & Brunner, P. (2026). Groundwater in the Pacific Islands under climate change. <i>Preprint at ESS Open Archive</i>. <a href="https://doi.org/10.22541/essoar.176442684.45381296/v2">Link</a>
+                    </div>
                 </div>
             </div>
         </div>
