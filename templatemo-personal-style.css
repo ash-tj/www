@@ -431,6 +431,7 @@ https://templatemo.com/tm-593-personal-shape
         .ja-details[open] summary {
             margin-bottom: 0.5rem;
         }
+
         .hero h1 {
             font-size: 5rem;
             font-weight: 700;
@@ -667,8 +668,7 @@ https://templatemo.com/tm-593-personal-shape
             border-radius: 20px;
             overflow: hidden;
             box-shadow: var(--shadow-xl);
-        }
-
+        
         @media (max-width: 768px) {
             .about-image {
                 float: none;
