@@ -434,7 +434,7 @@ https://templatemo.com/tm-593-personal-shape
         .hero h1 {
             font-size: 5rem;
             font-weight: 700;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
             opacity: 1;
             transform: translateY(30px);
             line-height: 1.4;
@@ -498,6 +498,7 @@ https://templatemo.com/tm-593-personal-shape
             border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s ease;
+            margin-top: 3rem
         }
 
         .scroll-indicator:hover {
@@ -734,12 +735,24 @@ https://templatemo.com/tm-593-personal-shape
 
         .about-text ol {
             margin-top: 1em;
-            margin-bottom: 1.3em;
+            margin-bottom: 1em;
+            padding-left: 1rem;
         }
         
         .about-text ul {
             margin-top: 1em;
-            margin-bottom: 2.5em;
+            margin-bottom: 1em;
+            padding-left: 1rem;
+        }
+
+        .about-text ul ul {
+            margin-top: 0.25rem;
+            margin-bottom: 0;
+            padding-left: 1.5rem;
+        }
+
+        .about-text ul ul li {
+            margin-bottom: 0.25rem;
         }
 
         .about-text .research-figure-grid {
