@@ -1,0 +1,1028 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Theis Solution – Interactive Learning</title>
+<style>
+:root{--ink:#19334a;--muted:#587084;--border:#dce5ee;--blue:#147cc2;--red:#d94841;--bg:#f4f7fa}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font:15px/1.5 system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--ink)}
+main{max-width:1180px;margin:auto;padding:24px}
+h1{font-size:29px;line-height:1.2;margin:0 0 8px}
+h2{font-size:19px;margin:0 0 10px}
+p{margin:7px 0 12px}
+.muted,.help{color:var(--muted)}
+.help{font-size:13px}
+.card{background:white;border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:0 3px 15px #18334a08}
+.layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);gap:16px;margin-top:16px;align-items:start}
+.wide{grid-column:1/-1}
+.top{display:grid;grid-template-columns:minmax(0,0.95fr) minmax(0,1.05fr);gap:16px;align-items:start}
+.math{background:#eef6fd;border:1px solid #cfe4f4;border-radius:10px;padding:12px 16px;margin:10px 0;overflow-x:auto}
+.math math{font-family:Cambria Math,STIX Two Math,serif;font-size:1.34em}
+.math .line{display:block;margin:8px 0}
+.definitions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 14px;margin-top:10px}
+.definitions span{font-size:14px}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.ctrl{padding:11px 12px;border:1px solid var(--border);border-radius:9px;background:#fbfdff}
+.ctrl.wide{grid-column:1/-1}
+.animation-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px}
+.animation-row button{border:1px solid #a8cbe5;background:#eef7ff;color:#095c9e;padding:6px 13px;border-radius:8px;font-weight:650;cursor:pointer}
+.animation-row button:hover{background:#d8edfc}
+.animation-row button:focus-visible{outline:2px solid #147cc2;outline-offset:2px}
+.ctrl label{display:flex;justify-content:space-between;gap:10px;font-weight:650}
+.ctrl output{font-variant-numeric:tabular-nums;color:#095c9e}
+.ctrl input{width:100%;margin-top:8px;accent-color:var(--blue)}
+.readouts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:14px}
+.readout{border:1px solid var(--border);border-radius:8px;padding:10px}
+.readout span{font-size:12px;color:var(--muted);display:block}
+.readout strong{font-size:17px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+canvas{display:block;width:100%;height:auto;border:1px solid #e1e8f0;border-radius:9px;background:#fff}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin:8px 0 0;font-size:13px}
+.swatch{display:inline-block;width:17px;height:3px;vertical-align:middle;margin-right:5px;background:var(--blue)}
+.swatch.red{background:var(--red)}
+.swatch.gray{background:#8293a4}
+.note{margin-top:10px;border-left:3px solid var(--blue);padding:9px 12px;background:#f4f9fe;font-size:13px}
+ul{padding-left:21px;margin:8px 0}
+li{margin:6px 0}
+.wf-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:start}
+.wf-grid h3{margin:2px 0 12px;font-size:16px}
+.wf-grid .math math{font-size:1.12em}
+.wf-grid .math{padding:10px;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{padding:8px 12px;border-bottom:1px solid var(--border);text-align:right}
+th:first-child,td:first-child{text-align:left}
+thead{background:#f2f7fb}
+@media(max-width:800px){
+ .wf-grid{grid-template-columns:1fr}
+ main{padding:12px}
+ .layout,.top{grid-template-columns:1fr}
+ .wide{grid-column:auto}
+ .controls{grid-template-columns:1fr}
+ .ctrl.wide{grid-column:auto}
+ .definitions{grid-template-columns:1fr}
+ .card{padding:14px}
+ .readouts{grid-template-columns:1fr}
+}
+
+/* Remove uneven panel heights and keep related content together. */
+.top > .card,.layout > .card{min-width:0}
+.layout > .card.wide{grid-column:1/-1}
+.layout{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+.layout > article:nth-child(2),.layout > article:nth-child(3){align-self:stretch !important;display:flex;flex-direction:column}
+.layout > article:nth-child(2) canvas,.layout > article:nth-child(3) canvas{margin-top:auto}
+.math .well-equation{white-space:nowrap;overflow-x:auto;max-width:100%}
+.math .well-equation math{font-size:1.02em}
+.top .card{align-self:start}
+.layout > .card:not(.wide){align-self:start}
+@media (min-width:801px){
+ .layout>article:nth-child(3) ul{columns:1}
+}
+@media (max-width:800px){
+ .layout,.top{grid-template-columns:minmax(0,1fr)}
+ .readouts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:500px){
+ .readouts{grid-template-columns:1fr}
+}
+.assumptions-inline{margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
+.assumptions-inline h3{font-size:16px;margin:0 0 7px}
+.assumptions-inline ul{margin:0;padding-left:20px;font-size:13.5px;line-height:1.42}
+.assumptions-inline li{margin:4px 0}
+#t{accent-color:#df3548}
+#t::-webkit-slider-thumb{background:#df3548}
+#t::-moz-range-thumb{background:#df3548;border-color:#df3548}
+
+/* Identical chart-panel geometry on desktop. */
+@media (min-width:801px){
+ .layout > article:nth-child(2),
+ .layout > article:nth-child(3){
+  display:grid;
+  grid-template-rows:52px 68px auto;
+  align-content:start;
+  align-self:stretch !important;
+ }
+ .layout > article:nth-child(2) h2,
+ .layout > article:nth-child(3) h2{margin:0}
+ .layout > article:nth-child(2) .help,
+ .layout > article:nth-child(3) .help{margin:0}
+ .layout > article:nth-child(2) canvas,
+ .layout > article:nth-child(3) canvas{
+  margin:0;
+  width:100%;
+  height:auto;
+  aspect-ratio:540 / 350;
+ }
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<header>
+<h1>Theis solution: Transient pumping in a confined aquifer</h1>
+<p class="muted">Satoshi Tajima (<a href="https://st-gw.net">Website</a>)</p>
+</header>
+
+<section class="top">
+
+<article class="card">
+<h2>Theis solution</h2>
+
+<div aria-label="Theis equations" class="math">
+
+<div class="line">
+<math display="block">
+<mrow>
+<mi>s</mi><mo>(</mo><mi>r</mi><mo>,</mo><mi>t</mi><mo>)</mo>
+<mo>=</mo>
+<mfrac><mi>Q</mi><mrow><mn>4</mn><mi>π</mi><mi>T</mi></mrow></mfrac>
+<mi>W</mi><mo>(</mo><mi>u</mi><mo>)</mo>
+</mrow>
+</math>
+</div>
+
+<div class="line">
+<span class="help">where</span>
+<math display="block">
+<mrow>
+<mi>u</mi><mo>=</mo>
+<mfrac>
+<mrow><msup><mi>r</mi><mn>2</mn></msup><mi>S</mi></mrow>
+<mrow><mn>4</mn><mi>T</mi><mi>t</mi></mrow>
+</mfrac>
+</mrow>
+</math>
+</div>
+
+<div class="line well-equation">
+<math aria-label="W of u equals integral from u to infinity of e to the minus x over x dx, equals minus gamma minus log u plus u minus u squared over four plus u cubed over eighteen minus u to the fourth over ninety-six and so on" display="block">
+<mrow>
+<mi>W</mi><mo>(</mo><mi>u</mi><mo>)</mo><mo>=</mo>
+<msubsup><mo>∫</mo><mi>u</mi><mi>∞</mi></msubsup>
+<mfrac><msup><mi>e</mi><mrow><mo>−</mo><mi>x</mi></mrow></msup><mi>x</mi></mfrac><mi>d</mi><mi>x</mi>
+<mo>=</mo><mo>−</mo><mi>γ</mi><mo>−</mo><mi>ln</mi><mi>u</mi>
+<mo>+</mo><mi>u</mi>
+<mo>−</mo><mfrac><msup><mi>u</mi><mn>2</mn></msup><mn>4</mn></mfrac>
+<mo>+</mo><mfrac><msup><mi>u</mi><mn>3</mn></msup><mn>18</mn></mfrac>
+<mo>−</mo><mfrac><msup><mi>u</mi><mn>4</mn></msup><mn>96</mn></mfrac>
+<mo>+</mo><mo>⋯</mo>
+</mrow>
+</math>
+<p class="help" style="margin:8px 0 0">
+<b>Euler–Mascheroni constant:</b>
+<span style="font-family:Cambria Math,serif;font-size:1.06em">γ ≈ 0.5772156649</span>
+</p>
+</div>
+
+</div>
+
+<div class="definitions">
+<span><b>s</b>: drawdown [m]</span>
+<span><b>Q</b>: pumping rate [m³/d]</span>
+<span><b>T = Kb</b>: transmissivity [m²/d]</span>
+<span><b>K</b>: hydraulic conductivity [m/d]</span>
+<span><b>b</b>: aquifer thickness [m]</span>
+<span><b>S</b>: storativity [–]</span>
+<span><b>r</b>: distance from well [m]</span>
+<span><b>t</b>: time since pumping [d]</span>
+</div>
+
+<div class="assumptions-inline">
+<h3>Key assumptions</h3>
+<ul>
+<li>Confined, homogeneous, isotropic aquifer with uniform thickness and infinite extent.</li>
+<li>Initially uniform hydraulic head; constant-rate pumping begins instantaneously.</li>
+<li>Fully penetrating line well; horizontal radial Darcy flow.</li>
+<li>Negligible wellbore storage, skin and well losses.</li>
+<li>Instantaneous storage response; constant transmissivity and storativity.</li>
+</ul>
+</div>
+</article>
+
+<article class="card">
+<h2>Adjust the parameters</h2>
+
+<div class="controls">
+
+<div class="ctrl">
+<label for="Q">Q <output id="vQ"></output></label>
+<input id="Q" max="5000" min="100" step="50" type="range" value="1200"/>
+<div class="help">Pumping rate</div>
+</div>
+
+<div class="ctrl">
+<label for="K">K <output id="vK"></output></label>
+<input id="K" max="2" min="-1" step="0.01" type="range" value="1.30103"/>
+<div class="help">Hydraulic conductivity (logarithmic slider)</div>
+</div>
+
+<div class="ctrl">
+<label for="b">b <output id="vb"></output></label>
+<input id="b" max="100" min="5" step="1" type="range" value="40"/>
+<div class="help">Confined aquifer thickness</div>
+</div>
+
+<div class="ctrl">
+<label for="S">S <output id="vS"></output></label>
+<input id="S" max="-1.5" min="-6" step="0.05" type="range" value="-3.3"/>
+<div class="help">Storativity (logarithmic slider)</div>
+</div>
+
+<div class="ctrl wide">
+<label for="r">r <output id="vr"></output></label>
+<input id="r" max="1000" min="1" step="1" type="range" value="150"/>
+<div class="help">Observation radius</div>
+</div>
+
+<div class="ctrl wide">
+<label for="t">t <output id="vt"></output></label>
+<input id="t" max="100" min="0.1" step="0.1" type="range" value="10"/>
+<div class="animation-row">
+<button aria-pressed="false" id="playTime" type="button">▶ Play</button>
+<button id="resetTime" type="button">↺ Reset</button>
+</div>
+</div>
+
+</div>
+
+<div class="readouts">
+<div class="readout">
+<span>Transmissivity T = Kb</span>
+<strong id="valT"></strong>
+</div>
+<div class="readout">
+<span>u = r²S/(4Tt)</span>
+<strong id="valU"></strong>
+</div>
+<div class="readout">
+<span>Well function W(u)</span>
+<strong id="valW"></strong>
+</div>
+<div class="readout">
+<span>Drawdown s(r,t)</span>
+<strong id="valS"></strong>
+</div>
+</div>
+</article>
+
+</section>
+
+<section class="layout">
+
+<article class="card wide">
+<h2>Cross-section: Potentiometric surface</h2>
+<canvas aria-label="Vertical cross-section of the confined aquifer and Theis drawdown" height="520" id="section" width="1100"></canvas>
+</article>
+
+<article class="card">
+<h2>Drawdown versus time at the observation points</h2>
+<p class="help">
+Drawdown <b>s(r,t)</b> at fixed <b>r</b> (<b>red observation points</b> in the cross-section). The red marker and vertical dashed line indicate the selected <b>t</b>.
+</p>
+<canvas height="350" id="timePlot" width="540"></canvas>
+</article>
+
+<article class="card">
+<h2>Theis well function W(u)</h2>
+<p class="help">
+Well function <b>W(u)</b> versus <b>u</b>. The red marker and vertical dashed line indicate the value of u for the selected parameters (S, T, r, and t).
+</p>
+<canvas aria-label="Graph of W(u) versus u on a logarithmic horizontal axis" height="350" id="wellFunctionPlot" width="540"></canvas>
+</article>
+
+</section>
+
+</main>
+
+<script>
+'use strict';
+
+const el=id=>document.getElementById(id),
+      gamma=0.5772156649015329;
+
+// Exponential integral E1(x).
+function E1(x){
+ if(x<=0)return Infinity;
+ if(x>745)return 0;
+
+ if(x<=1){
+  let result=-Math.log(x)-gamma,term=1;
+  for(let n=1;n<=120;n++){
+   term*=(-x/n);
+   const v=-term/n;
+   result+=v;
+   if(Math.abs(v)<1e-15*Math.max(1,Math.abs(result)))break;
+  }
+  return Math.max(0,result);
+ }
+
+ const tiny=1e-300;
+ let b=x+1,c=1/tiny,d=1/b,h=d;
+
+ for(let i=1;i<=250;i++){
+  let a=-i*i;
+  b+=2;
+  d=a*d+b;
+  if(Math.abs(d)<tiny)d=tiny;
+  c=b+a/c;
+  if(Math.abs(c)<tiny)c=tiny;
+  d=1/d;
+  let delta=c*d;
+  h*=delta;
+  if(Math.abs(delta-1)<1e-14)break;
+ }
+
+ return Math.exp(-x)*h;
+}
+
+function fmt(n,d=3){
+ if(n===0)return '0';
+ if(!Number.isFinite(n))return '∞';
+ if(Math.abs(n)<0.001||Math.abs(n)>=1e5)return n.toExponential(3);
+ return Number(n.toFixed(d)).toLocaleString('en-US',{maximumFractionDigits:d});
+}
+
+function get(){
+ const K=10**(+el('K').value),b=+el('b').value;
+ return {
+  Q:+el('Q').value,
+  K,b,T:K*b,
+  S:10**(+el('S').value),
+  r:+el('r').value,
+  t:+el('t').value
+ };
+}
+
+function drawdown(r,t,p){
+ const radius=Math.max(r,0.15);
+ return p.Q/(4*Math.PI*p.T)*E1(radius*radius*p.S/(4*p.T*t));
+}
+
+function niceStep(v){
+ if(!(v>0)||!isFinite(v))return 1;
+ const pow=10**Math.floor(Math.log10(v));
+ const f=v/pow;
+ return (f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10)*pow;
+}
+
+function positiveScale(maxValue){
+ if(!(maxValue>0)||!isFinite(maxValue))return {end:1,step:0.2};
+ const step=niceStep(maxValue/5);
+ return {
+  end:Math.max(step,Math.ceil(maxValue/step-1e-10)*step),
+  step
+ };
+}
+
+function spacedTicks(min,max,step){
+ const result=[];
+ const first=Math.ceil(min/step-1e-10);
+ const last=Math.floor(max/step+1e-10);
+ for(let k=first;k<=last;k++)
+  result.push(+(k*step).toPrecision(12));
+ return result;
+}
+
+function label(n){
+ if(Math.abs(n)<1e-10)return '0';
+ if(Math.abs(n)<.01)return n.toPrecision(2);
+ return Number(n.toFixed(5)).toLocaleString('en-US',{maximumFractionDigits:5});
+}
+
+// Shared axis helper.
+function axis(canvas,xmin,xmax,ymin,ymax,xTicks,yTicks,xLab,yLab){
+ let c=canvas.getContext('2d'),
+     W=canvas.width,H=canvas.height,
+     box={l:76,r:W-24,t:23,b:H-55};
+
+ c.clearRect(0,0,W,H);
+ c.fillStyle='#fff';
+ c.fillRect(0,0,W,H);
+
+ let X=x=>box.l+(x-xmin)/(xmax-xmin)*(box.r-box.l),
+     Y=y=>box.b-(y-ymin)/(ymax-ymin)*(box.b-box.t);
+
+ c.font='12px system-ui';
+ c.textBaseline='middle';
+
+ for(const y of yTicks){
+  if(y<ymin-1e-9||y>ymax+1e-9)continue;
+  let yy=Y(y);
+  c.strokeStyle='#e4edf4';
+  c.beginPath();
+  c.moveTo(box.l,yy);
+  c.lineTo(box.r,yy);
+  c.stroke();
+  c.fillStyle='#506579';
+  c.textAlign='right';
+  c.fillText(label(y),box.l-9,yy);
+ }
+
+ for(const tk of xTicks){
+  let xx=X(tk.x);
+  if(xx<box.l-1||xx>box.r+1)continue;
+  c.strokeStyle='#edf2f7';
+  c.beginPath();
+  c.moveTo(xx,box.t);
+  c.lineTo(xx,box.b);
+  c.stroke();
+  c.fillStyle='#506579';
+  c.textAlign='center';
+  c.fillText(tk.label,xx,box.b+17);
+ }
+
+ c.strokeStyle='#556b7c';
+ c.lineWidth=1.2;
+ c.strokeRect(box.l,box.t,box.r-box.l,box.b-box.t);
+
+ c.textAlign='center';
+ c.fillStyle='#19334a';
+ c.fillText(xLab,(box.l+box.r)/2,H-13);
+
+ c.save();
+ c.translate(18,(box.t+box.b)/2);
+ c.rotate(-Math.PI/2);
+ c.fillText(yLab,0,0);
+ c.restore();
+
+ return {c,X,Y,box};
+}
+
+function ticks(min,max,count=5){
+ let step=niceStep((max-min)/count),
+     first=Math.ceil(min/step)*step,
+     arr=[];
+ for(let v=first;v<=max+step*1e-8;v+=step)
+  arr.push(+v.toPrecision(12));
+ return arr;
+}
+
+function line(c,data,X,Y,color,width=2.8){
+ c.strokeStyle=color;
+ c.lineWidth=width;
+ c.beginPath();
+ data.forEach(([x,y],i)=>{
+  if(i===0)c.moveTo(X(x),Y(y));
+  else c.lineTo(X(x),Y(y));
+ });
+ c.stroke();
+}
+
+function dot(c,x,y,X,Y){
+ c.fillStyle='#d94841';
+ c.beginPath();
+ c.arc(X(x),Y(y),4.7,0,2*Math.PI);
+ c.fill();
+ c.strokeStyle='white';
+ c.lineWidth=1.5;
+ c.stroke();
+}
+
+// Drawdown versus time.
+function plotTime(p){
+ const tMax=100,pts=[];
+
+ for(let i=0;i<=500;i++){
+  const t=tMax*i/500;
+  const s=t===0?0:drawdown(p.r,t,p);
+  pts.push([t,s]);
+ }
+
+ const peak=Math.max(drawdown(p.r,p.t,p),...pts.map(point=>point[1]));
+ const scale=positiveScale(peak*1.05);
+ const yMax=scale.end;
+ const yTicks=spacedTicks(0,yMax,scale.step);
+ const xTicks=[0,20,40,60,80,100].map(x=>({x,label:String(x)}));
+
+ const a=axis(
+  el('timePlot'),0,tMax,0,yMax,
+  xTicks,yTicks,'t (d)','s (m)'
+ );
+
+ line(a.c,pts,a.X,a.Y,'#147cc2');
+
+ const tx=a.X(p.t);
+ a.c.strokeStyle='#d94841';
+ a.c.lineWidth=1.6;
+ a.c.setLineDash([5,5]);
+ a.c.beginPath();
+ a.c.moveTo(tx,a.box.t);
+ a.c.lineTo(tx,a.box.b);
+ a.c.stroke();
+ a.c.setLineDash([]);
+
+ dot(a.c,p.t,drawdown(p.r,p.t,p),a.X,a.Y);
+}
+
+// Theis well function W(u).
+// Modified: red vertical dashed line added.
+function plotWellFunction(p){
+ const minLog=-8,maxLog=3;
+
+ const xs=[-8,-6,-4,-2,0,1,2,3].map(k=>({
+  x:k,
+  label:'10'+({
+   '-8':'⁻⁸',
+   '-6':'⁻⁶',
+   '-4':'⁻⁴',
+   '-2':'⁻²',
+   '0':'⁰',
+   '1':'¹',
+   '2':'²',
+   '3':'³'
+  }[String(k)])
+ }));
+
+ const ymax=20;
+
+ const a=axis(
+  el('wellFunctionPlot'),
+  minLog,maxLog,0,ymax,
+  xs,[0,5,10,15,20],
+  'u (-; logarithmic)',
+  'W(u) (-)'
+ );
+
+ const pts=[];
+
+ for(let i=0;i<=550;i++){
+  const lx=minLog+(maxLog-minLog)*i/550;
+  pts.push([lx,E1(10**lx)]);
+ }
+
+ line(a.c,pts,a.X,a.Y,'#147cc2',2.8);
+
+ const u=p.r*p.r*p.S/(4*p.T*p.t);
+ const w=E1(u);
+ const lu=Math.log10(u);
+
+ if(lu>=minLog && lu<=maxLog && w<=ymax){
+
+  // Red vertical dashed line.
+  const tx=a.X(lu);
+
+  a.c.strokeStyle='#d94841';
+  a.c.lineWidth=1.6;
+  a.c.setLineDash([5,5]);
+
+  a.c.beginPath();
+  a.c.moveTo(tx,a.box.t);
+  a.c.lineTo(tx,a.box.b);
+  a.c.stroke();
+
+  a.c.setLineDash([]);
+
+  // Selected point.
+  dot(a.c,lu,w,a.X,a.Y);
+ }
+}
+
+// Cross-section: potentiometric surface.
+function plotSection(p){
+
+ const cv=el('section'),
+       c=cv.getContext('2d'),
+       W=cv.width,
+       H=cv.height;
+
+ c.clearRect(0,0,W,H);
+ c.fillStyle='#fff';
+ c.fillRect(0,0,W,H);
+
+ const left=96,
+       right=W-47,
+       center=(left+right)/2,
+       R=1000;
+
+ const yTop=70,
+       yBottom=280,
+       axisMax=100;
+
+ const aqTop=334,
+       aqBottom=455,
+       rw=0.15;
+
+ const axisY=aqBottom+25;
+
+ const X=signedR=>center+(signedR/R)*(right-left)/2;
+
+ const Y=s=>yTop+
+  Math.max(0,Math.min(axisMax,s))/axisMax*(yBottom-yTop);
+
+ // Confined aquifer geometry.
+ c.fillStyle='#f2efe7';
+ c.fillRect(left,aqTop,right-left,aqBottom-aqTop);
+
+ c.fillStyle='#f7f7f5';
+ c.fillRect(left,aqTop-14,right-left,14);
+ c.fillRect(left,aqBottom,right-left,12);
+
+ c.strokeStyle='#777';
+ c.lineWidth=1.8;
+
+ for(const y of [aqTop,aqBottom]){
+  c.beginPath();
+  c.moveTo(left,y);
+  c.lineTo(right,y);
+  c.stroke();
+ }
+
+ for(let x=left;x<right;x+=15){
+  for(const y of [aqTop,aqBottom+12]){
+   c.beginPath();
+   c.moveTo(x,y);
+   c.lineTo(x+8,y-11);
+   c.strokeStyle='#a5a5a5';
+   c.lineWidth=1;
+   c.stroke();
+  }
+ }
+
+ // Fixed drawdown axis 0–100 m.
+ c.font='12px system-ui';
+ c.textBaseline='middle';
+ c.textAlign='right';
+
+ for(let s=0;s<=axisMax;s+=20){
+  const yy=Y(s);
+
+  c.strokeStyle='#e8eff6';
+  c.lineWidth=1;
+  c.beginPath();
+  c.moveTo(left,yy);
+  c.lineTo(right,yy);
+  c.stroke();
+
+  c.fillStyle='#506579';
+  c.fillText(String(s),left-11,yy);
+ }
+
+ c.save();
+ c.translate(25,(yTop+yBottom)/2);
+ c.rotate(-Math.PI/2);
+ c.textAlign='center';
+ c.fillStyle='#19334a';
+ c.fillText('Drawdown s (m; increases downward)',0,0);
+ c.restore();
+
+ // Initial potentiometric head.
+ c.strokeStyle='#8995a4';
+ c.setLineDash([8,6]);
+ c.lineWidth=2.2;
+ c.beginPath();
+ c.moveTo(left,yTop);
+ c.lineTo(right,yTop);
+ c.stroke();
+ c.setLineDash([]);
+
+ // Exact Theis curve.
+ const radii=[rw];
+
+ for(let i=1;i<=180;i++)
+  radii.push(rw*Math.pow(R/rw,i/180));
+
+ for(let r=2;r<=R;r+=2)
+  radii.push(r);
+
+ radii.push(R);
+ radii.sort((a,b)=>a-b);
+
+ let clipped=false;
+
+ for(const side of [-1,1]){
+  c.save();
+  c.beginPath();
+  c.rect(left,yTop,right-left,yBottom-yTop);
+  c.clip();
+
+  c.beginPath();
+  let started=false;
+
+  for(const rad of radii){
+   const s=drawdown(rad,p.t,p);
+   if(s>axisMax)clipped=true;
+
+   const xx=X(side*rad),
+         yy=Y(s);
+
+   if(!started){
+    c.moveTo(xx,yy);
+    started=true;
+   }else{
+    c.lineTo(xx,yy);
+   }
+  }
+
+  c.strokeStyle='#147cc2';
+  c.lineWidth=3;
+  c.stroke();
+  c.restore();
+ }
+
+ // Pumping well.
+ c.strokeStyle='#2c3d4d';
+ c.lineWidth=2.5;
+ c.beginPath();
+ c.moveTo(center,28);
+ c.lineTo(center,aqBottom+8);
+ c.stroke();
+
+ // Pumping arrow.
+ c.strokeStyle='#2c3d4d';
+ c.lineWidth=1.7;
+ c.beginPath();
+ c.moveTo(center,56);
+ c.lineTo(center+68,26);
+ c.stroke();
+
+ c.fillStyle='#2c3d4d';
+ c.beginPath();
+ c.moveTo(center+68,26);
+ c.lineTo(center+57,26);
+ c.lineTo(center+62,35);
+ c.closePath();
+ c.fill();
+
+ c.font='bold 14px system-ui';
+ c.textAlign='left';
+ c.fillStyle='#19334a';
+ c.fillText(`Q = ${fmt(p.Q,0)} m³/d`,center+79,26);
+
+ c.font='12px system-ui';
+ c.fillText('Well (r = 0)',center+12,57);
+
+ c.fillStyle='#607386';
+ c.textAlign='right';
+ c.fillText('Initial head, s = 0',right-9,yTop-14);
+
+ c.fillStyle='#147cc2';
+ c.fillText('Potentiometric surface (from Theis)',right-9,yTop+35);
+
+ c.textAlign='left';
+ c.fillStyle='#19334a';
+ c.font='bold 14px system-ui';
+ c.fillText(`Snapshot at t = ${fmt(p.t,1)} d`,left+12,25);
+
+ // Observation points.
+ const sr=drawdown(p.r,p.t,p);
+ const yyObs=Y(sr);
+
+ const xLeftObs=X(-p.r),
+       xRightObs=X(p.r);
+
+ c.strokeStyle='#d94841';
+ c.lineWidth=1.5;
+ c.setLineDash([6,5]);
+
+ c.beginPath();
+ c.moveTo(left,yyObs);
+ c.lineTo(xRightObs,yyObs);
+ c.stroke();
+
+ for(const xx of [xLeftObs,xRightObs]){
+  c.beginPath();
+  c.moveTo(xx,yyObs);
+  c.lineTo(xx,axisY);
+  c.stroke();
+ }
+
+ c.setLineDash([]);
+
+ for(const xx of [xLeftObs,xRightObs]){
+  c.fillStyle='#d94841';
+  c.beginPath();
+  c.arc(xx,yyObs,5,0,Math.PI*2);
+  c.fill();
+
+  c.strokeStyle='#fff';
+  c.lineWidth=1.3;
+  c.stroke();
+ }
+
+ // Observation annotations.
+ function sectionAnnotation(text,x,y,align){
+  c.font='bold 12px system-ui';
+  c.textBaseline='middle';
+  c.textAlign=align;
+
+  const width=c.measureText(text).width,
+        pad=4;
+
+  const x0=align==='right'
+   ?x-width-pad
+   :align==='center'
+    ?x-width/2-pad
+    :x-pad;
+
+  c.fillStyle='rgba(255,255,255,0.94)';
+  c.fillRect(x0,y-9,width+pad*2,18);
+
+  c.fillStyle='#c73535';
+  c.fillText(text,x,y);
+ }
+
+ const syLabel=yyObs<yTop+24?yyObs+17:yyObs-16;
+
+ sectionAnnotation(
+  `s = ${fmt(sr,3)} m`,
+  left+12,syLabel,'left'
+ );
+
+ const rLabel=`r = ${fmt(p.r,0)} m`,
+       rLabelY=axisY-12;
+
+ if(xRightObs-xLeftObs<180){
+  sectionAnnotation(rLabel,xLeftObs-9,rLabelY,'right');
+  sectionAnnotation(rLabel,xRightObs+9,rLabelY,'left');
+ }else{
+  sectionAnnotation(rLabel,xLeftObs,rLabelY,'center');
+  sectionAnnotation(rLabel,xRightObs,rLabelY,'center');
+ }
+
+ if(clipped || sr>axisMax){
+  c.fillStyle='#b42318';
+  c.textAlign='right';
+  c.font='bold 12px system-ui';
+  c.fillText('Profile clipped above 100 m',right-8,yBottom+42);
+ }
+
+ // Aquifer thickness.
+ const dimX=right-17;
+
+ c.strokeStyle='#334155';
+ c.lineWidth=1.5;
+ c.beginPath();
+ c.moveTo(dimX,aqTop+9);
+ c.lineTo(dimX,aqBottom-9);
+ c.stroke();
+
+ for(const [y,sgn] of [[aqTop+9,1],[aqBottom-9,-1]]){
+  c.beginPath();
+  c.moveTo(dimX,y);
+  c.lineTo(dimX-5,y+sgn*12);
+  c.lineTo(dimX+5,y+sgn*12);
+  c.closePath();
+  c.fillStyle='#334155';
+  c.fill();
+ }
+
+ c.font='bold 15px system-ui';
+ c.fillStyle='#19334a';
+ c.textAlign='right';
+ c.fillText(
+  `b = ${fmt(p.b,0)} m`,
+  dimX-15,(aqTop+aqBottom)/2
+ );
+
+ c.font='12px system-ui';
+ c.fillStyle='#596b7b';
+ c.textAlign='left';
+ c.fillText('Confined aquifer',left+12,aqTop+29);
+
+ c.font='bold 13px system-ui';
+ c.fillStyle='#19334a';
+ c.fillText(`K = ${fmt(p.K,3)} m/d`,left+12,aqTop+53);
+ c.fillText(`S = ${fmt(p.S,6)}`,left+12,aqTop+75);
+
+ // Distance axis from the well.
+ // Modified: tick labels moved upward to avoid overlap.
+ c.strokeStyle='#60778a';
+ c.lineWidth=1.2;
+ c.beginPath();
+ c.moveTo(left,axisY);
+ c.lineTo(right,axisY);
+ c.stroke();
+
+ for(const rad of [-1000,-500,0,500,1000]){
+  const xx=X(rad);
+
+  c.beginPath();
+  c.moveTo(xx,axisY-4);
+  c.lineTo(xx,axisY+4);
+  c.stroke();
+
+  c.font='12px system-ui';
+  c.textAlign='center';
+  c.fillStyle='#506579';
+
+  const tickLabel=Math.abs(rad);
+
+  // Changed from axisY+34 to axisY+18.
+  c.fillText(String(tickLabel),xx,axisY+18);
+ }
+
+ c.fillStyle='#19334a';
+ c.textAlign='center';
+ c.fillText('Distance from well r (m)',center,H-11);
+}
+
+// Update all displays.
+function render(){
+ const p=get();
+
+ el('vQ').textContent=fmt(p.Q,0)+' m³/d';
+ el('vK').textContent=fmt(p.K,3)+' m/d';
+ el('vb').textContent=fmt(p.b,0)+' m';
+
+ el('valT').textContent=fmt(p.T,2)+' m²/d';
+ el('vS').textContent=fmt(p.S,6);
+ el('vr').textContent=fmt(p.r,0)+' m';
+ el('vt').textContent=fmt(p.t,4)+' d';
+
+ const u=p.r*p.r*p.S/(4*p.T*p.t);
+ const w=E1(u);
+
+ el('valU').textContent=fmt(u,6);
+ el('valW').textContent=fmt(w,6);
+ el('valS').textContent=
+  fmt(p.Q/(4*Math.PI*p.T)*w,5)+' m';
+
+ plotSection(p);
+ plotTime(p);
+ plotWellFunction(p);
+}
+
+// Parameter listeners.
+for(const id of ['Q','K','b','S','r','t']){
+ el(id).addEventListener('input',render);
+}
+
+// Time animation.
+let animationFrame=null,
+    previousTime=null;
+
+const playbackMs=15000,
+      minT=+el('t').min,
+      maxT=+el('t').max;
+
+function stopAnimation(){
+ if(animationFrame!==null){
+  cancelAnimationFrame(animationFrame);
+  animationFrame=null;
+ }
+
+ previousTime=null;
+ el('playTime').textContent='▶ Play';
+ el('playTime').setAttribute('aria-pressed','false');
+}
+
+function animateFrame(now){
+ if(animationFrame===null)return;
+
+ if(previousTime!==null){
+  const delta=(now-previousTime)*(maxT-minT)/playbackMs;
+  const next=Math.min(maxT,+el('t').value+delta);
+
+  el('t').value=next.toFixed(1);
+  render();
+
+  if(next>=maxT-0.00001){
+   stopAnimation();
+   return;
+  }
+ }
+
+ previousTime=now;
+ animationFrame=requestAnimationFrame(animateFrame);
+}
+
+el('playTime').addEventListener('click',()=>{
+ if(animationFrame!==null){
+  stopAnimation();
+  return;
+ }
+
+ if(+el('t').value>=maxT)
+  el('t').value=String(minT);
+
+ previousTime=null;
+
+ el('playTime').textContent='❚❚ Pause';
+ el('playTime').setAttribute('aria-pressed','true');
+
+ animationFrame=requestAnimationFrame(animateFrame);
+ render();
+});
+
+el('resetTime').addEventListener('click',()=>{
+ stopAnimation();
+ el('t').value=String(minT);
+ render();
+});
+
+el('t').addEventListener('input',()=>{
+ if(animationFrame!==null)stopAnimation();
+});
+
+document.addEventListener('visibilitychange',()=>{
+ if(document.hidden)stopAnimation();
+});
+
+render();
+
+</script>
+</body>
+</html>
